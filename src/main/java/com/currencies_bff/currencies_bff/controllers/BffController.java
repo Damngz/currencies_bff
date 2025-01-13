@@ -42,7 +42,7 @@ public class BffController {
     return ResponseEntity.ok(bffService.createCurrency(currency));
   }
 
-  @GetMapping("/favorites/{userId}")
+  @GetMapping("/favorites/user/{userId}")
   public ResponseEntity<?> getFavoritesByUser(@PathVariable Long userId) {
     return ResponseEntity.ok(bffService.getFavoritesByUser(userId));
   }
