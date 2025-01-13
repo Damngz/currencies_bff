@@ -1,5 +1,8 @@
 package com.currencies_bff.currencies_bff.controllers;
 
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +19,13 @@ import com.currencies_bff.currencies_bff.services.BffService;
 @RequestMapping("/bff")
 public class BffController {
 
-	private final BffService bffService;
+  @Autowired
+	private BffService bffService;
 
-	public BffController(BffService bffService) {
-		this.bffService = bffService;
-	}
+  @GetMapping
+  public ResponseEntity<?> get() {
+    return ResponseEntity.ok(bffService.getAllCurrencies());
+  }
 
   @GetMapping("/currencies")
   public ResponseEntity<?> getAllCurrencies() {
@@ -33,7 +38,7 @@ public class BffController {
   }
 
   @PostMapping("/currencies")
-  public ResponseEntity<?> createCurrency(@RequestBody Object currency) {
+  public ResponseEntity<?> createCurrency(@RequestBody Map<String, String> currency) {
     return ResponseEntity.ok(bffService.createCurrency(currency));
   }
 
@@ -43,7 +48,17 @@ public class BffController {
   }
 
   @PostMapping("/favorites")
-  public ResponseEntity<?> addFavorite(@RequestBody Object favorite) {
+  public ResponseEntity<?> addFavorite(@RequestBody Map<String, String> favorite) {
     return ResponseEntity.ok(bffService.addFavorite(favorite));
+  }
+
+  @GetMapping("/users")
+  public ResponseEntity<?> getAllUsers() {
+    return ResponseEntity.ok(bffService.getAllUsers());
+  }
+
+  @GetMapping("/users/{email}")
+  public ResponseEntity<?> getUserByEmail(@PathVariable("email") String email) {
+    return ResponseEntity.ok(bffService.getUserByEmail(email));
   }
 }
