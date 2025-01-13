@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "ClientRest", url = "http://localhost:8081")
+@FeignClient(name = "ClientRest", url = "https://3.231.40.122:8081")
 public interface ClientRest {
 	@GetMapping("/currencies")
   List<Object> getAllCurrencies();
